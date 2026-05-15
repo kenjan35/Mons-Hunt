@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dh6suuu1lpaln"]
+
+[ext_resource type="PackedScene" uid="uid://1fv5tqtjgiqs" path="res://scenes/ground.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://c52citb4ahl1h" path="res://scenes/character.tscn" id="2_0wfyh"]
+
+[node name="Main" type="Node3D" unique_id=245839776]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1743858862]
+transform = Transform3D(-0.1263075, -0.99158186, 0.028494585, 0.0040723253, 0.028206095, 0.9995938, -0.9919828, 0.12637223, 0.0004754025, 0, 31.4962, 0)
+shadow_enabled = true
+
+[node name="Ground" parent="." unique_id=95938912 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27714443, 0)
+
+[node name="CharacterBody3D" parent="." unique_id=1189578310 instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8781395, 0)

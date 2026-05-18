@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c52citb4ahl1h"]
 
 [ext_resource type="Script" uid="uid://ct5dnxqbf52cf" path="res://scripts/character.gd" id="1_agfs1"]
+[ext_resource type="Script" uid="uid://br4qldcaw76ta" path="res://scripts/spring_arm_camera_3d.gd" id="2_rkhd4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dkjbp"]
 radius = 0.48242188
@@ -18,8 +19,10 @@ shape = SubResource("CapsuleShape3D_dkjbp")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=981050565]
 mesh = SubResource("CapsuleMesh_agfs1")
 
-[node name="Marker3D" type="Marker3D" parent="." unique_id=1480505396]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0954165, 2.8105714)
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1695428081]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2515008, 0)
+spring_length = 5.0
+script = ExtResource("2_rkhd4")
 
-[node name="Camera3D" type="Camera3D" parent="Marker3D" unique_id=1394903732]
-transform = Transform3D(1, 0, 0, 0, 0.9765598, 0.21524668, 0, -0.21524668, 0.9765598, 0, 0, 0)
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=335375308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.7426212)

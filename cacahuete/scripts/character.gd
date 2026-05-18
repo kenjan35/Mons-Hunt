@@ -1,39 +1,33 @@
 extends CharacterBody3D
 
-# How fast the player moves in meters per second.
-@export var speed = 7
-# The downward acceleration when in the air, in meters per second squared.
-@export var fall_acceleration = 75
+@export var speed = 7.0
+@export var jump_velocity = 7.0
 
-# How far the player can jump
-@export var jump = 2
+@onready var spring_arm = $SpringArm3D
 
-var target_velocity = Vector3.ZERO
-
+# Get the gravity from the project settings
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _physics_process(delta):
-	var direction = Vector3.ZERO
+	if not is_on_floor():
+		velocity.y -= gravity * delta
 
-	if Input.is_action_pressed("move_right"):
-		direction.x += 1
-	if Input.is_action_pressed("move_left"):
-		direction.x -= 1
-	if Input.is_action_pressed("move_back"):
-		direction.z += 1
-	if Input.is_action_pressed("move_forward"):
-		direction.z -= 1
-	#if is_on_floor() and Input.is_action_just_pressed("jump"):
-		#direction.y += jump
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
 
-	# Ground Velocity
-	target_velocity.x = direction.x * speed
-	target_velocity.z = direction.z * speed
-	#target_velocity.y = direction.y
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var forward = spring_arm.global_transform.basis.z
+	var right = spring_arm.global_transform.basis.x
+	forward.y = 0
+	right.y = 0
+	forward = forward.normalized()
+	right = right.normalized()
+	var direction = (forward * input_dir.y + right * input_dir.x).normalized()
+	if direction != Vector3.ZERO:
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 
-	# Vertical Velocity
-	if not is_on_floor(): # If in the air, fall towards the floor. Literally gravity
-		target_velocity.y = target_velocity.y - (fall_acceleration * delta)
-
-	# Moving the Character
-	velocity = target_velocity
 	move_and_slide()

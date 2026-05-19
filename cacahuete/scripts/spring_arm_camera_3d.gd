@@ -18,7 +18,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		spring_length -= 1
 	if event.is_action_pressed("zoom_out"):
 		spring_length += 1
-	if event.is_action_pressed("mouse_capture"):
+	if event.is_action_pressed("pause_game"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:

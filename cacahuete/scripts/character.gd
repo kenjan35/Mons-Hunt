@@ -18,18 +18,24 @@ extends CharacterBody3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var current_speed = 7.0
+var is_game_paused: bool = false
 
 func _physics_process(delta):
-	apply_gravity(delta)
-	
-	var direction = get_movement_direction()
-	
-	handle_speed_and_zoom(direction, delta)
-	handle_movement(direction, delta)
-	handle_jump()
-	
-	move_and_slide()
+	manage_pause()
+	if is_game_paused == false:
+		apply_gravity(delta)
+		
+		var direction = get_movement_direction()
+		
+		handle_speed_and_zoom(direction, delta)
+		handle_movement(direction, delta)
+		handle_jump()
+		
+		move_and_slide()
 
+func manage_pause():
+	if Input.is_action_just_pressed("pause_game"):
+		is_game_paused = not is_game_paused
 
 func apply_gravity(delta):
 	if not is_on_floor():

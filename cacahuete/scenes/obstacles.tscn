@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dcad8cqvcptnu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpc7s"]
+albedo_color = Color(0.9522107, 0.117316104, 1.92523e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wpc7s"]
+material = SubResource("StandardMaterial3D_wpc7s")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7soh5"]
+size = Vector3(1.95, 1.95, 1.95)
+
+[node name="obstacles" type="RigidBody3D" unique_id=1632510330]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1197185231]
+mesh = SubResource("BoxMesh_wpc7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1232417313]
+shape = SubResource("BoxShape3D_7soh5")

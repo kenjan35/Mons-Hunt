@@ -2,11 +2,21 @@
 
 [ext_resource type="PackedScene" uid="uid://1fv5tqtjgiqs" path="res://scenes/ground.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c52citb4ahl1h" path="res://scenes/character.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://dcad8cqvcptnu" path="res://scenes/obstacles.tscn" id="3_sugp2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
+
+[sub_resource type="Sky" id="Sky_sugp2"]
+sky_material = SubResource("ProceduralSkyMaterial_0wfyh")
+
+[sub_resource type="Environment" id="Environment_0wfyh"]
+background_mode = 2
+sky = SubResource("Sky_sugp2")
 
 [node name="Main" type="Node3D" unique_id=245839776]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1743858862]
-transform = Transform3D(-0.1263075, -0.99158186, 0.028494585, 0.0040723253, 0.028206095, 0.9995938, -0.9919828, 0.12637223, 0.0004754025, 0, 31.4962, 0)
+transform = Transform3D(0.40705547, -0.544633, -0.73326725, -0.08517652, -0.8219211, 0.5631969, -0.90942335, -0.16679521, -0.38095742, -63.789745, 31.4962, 0)
 shadow_enabled = true
 
 [node name="Ground" parent="." unique_id=95938912 instance=ExtResource("1_o5qli")]
@@ -14,3 +24,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27714443, 0)
 
 [node name="CharacterBody3D" parent="." unique_id=1189578310 instance=ExtResource("2_0wfyh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8781395, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1334561182]
+environment = SubResource("Environment_0wfyh")
+
+[node name="cube_obstacles" type="Node3D" parent="." unique_id=1483713289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.21772, -43.17649)
+
+[node name="obstacles" parent="cube_obstacles" unique_id=1632510330 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 4, -2)
+
+[node name="obstacles2" parent="cube_obstacles" unique_id=807563477 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 4, -2)
+
+[node name="obstacles3" parent="cube_obstacles" unique_id=682697486 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 4, -2)
+
+[node name="obstacles4" parent="cube_obstacles" unique_id=1495873914 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4, -2)
+
+[node name="obstacles5" parent="cube_obstacles" unique_id=147312709 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2)

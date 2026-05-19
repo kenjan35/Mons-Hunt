@@ -9,8 +9,14 @@ height = 1.972168
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_agfs1"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkhd4"]
+albedo_color = Color(0.08627451, 0.22352941, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_rkhd4"]
+material = SubResource("StandardMaterial3D_rkhd4")
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rkhd4"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1189578310]
 script = ExtResource("1_agfs1")
@@ -28,6 +34,7 @@ mesh = SubResource("BoxMesh_rkhd4")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1695428081]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2515008, 0)
+shape = SubResource("SphereShape3D_rkhd4")
 spring_length = 5.0
 script = ExtResource("2_rkhd4")
 

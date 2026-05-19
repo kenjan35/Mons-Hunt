@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://1fv5tqtjgiqs" path="res://scenes/ground.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c52citb4ahl1h" path="res://scenes/character.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://dcad8cqvcptnu" path="res://scenes/obstacles.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://c8o6euolcxgte" path="res://scenes/coin.tscn" id="4_jyhfs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
 
@@ -23,7 +24,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27714443, 0)
 
 [node name="CharacterBody3D" parent="." unique_id=1189578310 instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8781395, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5614777, -14.742352)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1334561182]
 environment = SubResource("Environment_0wfyh")
@@ -45,3 +46,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4, -2)
 
 [node name="obstacles5" parent="cube_obstacles" unique_id=147312709 instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2)
+
+[node name="collectible" type="Node3D" parent="." unique_id=1453385874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -35)
+
+[node name="Coin" parent="collectible" unique_id=995026381 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 10)
+
+[node name="Coin2" parent="collectible" unique_id=2019895353 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 57.924995)
+
+[node name="Coin3" parent="collectible" unique_id=502033658 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.573677, 0.5, 16.441837)
+
+[node name="Coin4" parent="collectible" unique_id=1369580189 instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.16629, 0.5, 10)

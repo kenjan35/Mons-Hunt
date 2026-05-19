@@ -19,6 +19,7 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="SphereShape3D" id="SphereShape3D_rkhd4"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1189578310]
+collision_mask = 8
 script = ExtResource("1_agfs1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1321574271]

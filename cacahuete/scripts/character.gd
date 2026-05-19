@@ -37,6 +37,12 @@ func manage_pause():
 	if Input.is_action_just_pressed("pause_game"):
 		is_game_paused = not is_game_paused
 
+# This is the tru way to pause the entire game !
+# Since there is no UI for now, I will use mine to pause the player
+#func manage_pause():
+#	if Input.is_action_just_pressed("pause_game"):
+#		get_tree().paused = not get_tree().paused
+
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta

@@ -11,6 +11,8 @@ size = Vector3(2, 2, 2)
 size = Vector3(1.95, 1.95, 1.95)
 
 [node name="obstacles" type="RigidBody3D" unique_id=1632510330]
+collision_layer = 4
+collision_mask = 13
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1197185231]
 mesh = SubResource("BoxMesh_wpc7s")

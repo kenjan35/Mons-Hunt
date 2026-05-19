@@ -19,6 +19,7 @@ extends CharacterBody3D
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var current_speed = 7.0
 var is_game_paused: bool = false
+var current_obj = null
 
 func _physics_process(delta):
 	manage_pause()
@@ -27,6 +28,7 @@ func _physics_process(delta):
 		
 		var direction = get_movement_direction()
 		
+		handle_interactive()
 		handle_speed_and_zoom(direction, delta)
 		handle_movement(direction, delta)
 		handle_jump()
@@ -37,7 +39,7 @@ func manage_pause():
 	if Input.is_action_just_pressed("pause_game"):
 		is_game_paused = not is_game_paused
 
-# This is the tru way to pause the entire game !
+# This is the true way to pause the entire game !
 # Since there is no UI for now, I will use mine to pause the player
 #func manage_pause():
 #	if Input.is_action_just_pressed("pause_game"):
@@ -89,3 +91,17 @@ func handle_movement(direction: Vector3, delta: float):
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
+
+func handle_interactive():
+	if current_obj != null and Input.is_action_just_pressed("interact"):
+		current_obj.execute()
+		
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	print("player message: entered !")
+	current_obj = body
+
+
+func _on_area_3d_body_exited(_body: Node3D) -> void:
+	print("removed oj")
+	current_obj = null

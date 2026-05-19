@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c52citb4ahl1h" path="res://scenes/character.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://dcad8cqvcptnu" path="res://scenes/obstacles.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://c8o6euolcxgte" path="res://scenes/coin.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://ek2lxivf45tg" path="res://scenes/wall_break.tscn" id="5_tbgi4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
 
@@ -53,11 +54,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -35)
 [node name="Coin" parent="collectible" unique_id=995026381 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 10)
 
-[node name="Coin2" parent="collectible" unique_id=2019895353 instance=ExtResource("4_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 57.924995)
-
-[node name="Coin3" parent="collectible" unique_id=502033658 instance=ExtResource("4_jyhfs")]
+[node name="Coin2" parent="collectible" unique_id=502033658 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.573677, 0.5, 16.441837)
 
-[node name="Coin4" parent="collectible" unique_id=1369580189 instance=ExtResource("4_jyhfs")]
+[node name="Coin43" parent="collectible" unique_id=1369580189 instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.16629, 0.5, 10)
+
+[node name="Interactive_objs" type="Node3D" parent="." unique_id=1898819729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="wall_break" parent="Interactive_objs" unique_id=1142373083 instance=ExtResource("5_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

@@ -16,10 +16,12 @@ albedo_color = Color(0.08627451, 0.22352941, 1, 1)
 material = SubResource("StandardMaterial3D_rkhd4")
 size = Vector3(0.5, 0.5, 0.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_rkhd4"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_rkhd4"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1189578310]
-collision_mask = 8
+collision_mask = 24
 script = ExtResource("1_agfs1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1321574271]
@@ -33,11 +35,23 @@ mesh = SubResource("CapsuleMesh_agfs1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9815228, -1.4473577)
 mesh = SubResource("BoxMesh_rkhd4")
 
+[node name="Area3D" type="Area3D" parent="MeshInstance3D" unique_id=275033293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24743736, -1.2930505)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" unique_id=314268570]
+shape = SubResource("BoxShape3D_rkhd4")
+
 [node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1695428081]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2515008, 0)
+collision_mask = 15
 shape = SubResource("SphereShape3D_rkhd4")
 spring_length = 5.0
 script = ExtResource("2_rkhd4")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=335375308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.7426212)
+
+[connection signal="body_entered" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_body_exited"]

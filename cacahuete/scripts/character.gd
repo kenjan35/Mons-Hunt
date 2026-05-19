@@ -95,13 +95,11 @@ func handle_movement(direction: Vector3, delta: float):
 func handle_interactive():
 	if current_obj != null and Input.is_action_just_pressed("interact"):
 		current_obj.execute()
-		
+
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	print("player message: entered !")
 	current_obj = body
 
 
 func _on_area_3d_body_exited(_body: Node3D) -> void:
-	print("removed oj")
 	current_obj = null

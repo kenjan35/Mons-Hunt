@@ -13,7 +13,7 @@ extends CharacterBody3D
 @export var run_fov = 90.0
 
 @onready var spring_arm = $SpringArm3D
-@onready var mesh = $MeshInstance3D
+@onready var pivot = $character_pivot
 @onready var camera = $SpringArm3D/Camera3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -86,8 +86,8 @@ func handle_movement(direction: Vector3, delta: float):
 		velocity.z = direction.z * current_speed
 		
 		var target_look = global_position + direction
-		var target_basis = mesh.global_transform.looking_at(target_look, Vector3.UP).basis
-		mesh.global_transform.basis = mesh.global_transform.basis.slerp(target_basis, rotation_speed * delta)
+		var target_basis = pivot.global_transform.looking_at(target_look, Vector3.UP).basis
+		pivot.global_transform.basis = pivot.global_transform.basis.slerp(target_basis, rotation_speed * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)

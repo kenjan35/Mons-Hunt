@@ -14,6 +14,7 @@ extends CharacterBody3D
 
 @onready var spring_arm = $SpringArm3D
 @onready var pivot = $character_pivot
+@onready var animation = $character_pivot/AuxScene/AnimationPlayer
 @onready var camera = $SpringArm3D/Camera3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -82,6 +83,8 @@ func handle_speed_and_zoom(direction: Vector3, delta: float):
 
 func handle_movement(direction: Vector3, delta: float):
 	if direction != Vector3.ZERO:
+		if animation.current_animation != "Running_3":
+			animation.play("Running_3")
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
 		
@@ -89,6 +92,8 @@ func handle_movement(direction: Vector3, delta: float):
 		var target_basis = pivot.global_transform.looking_at(target_look, Vector3.UP).basis
 		pivot.global_transform.basis = pivot.global_transform.basis.slerp(target_basis, rotation_speed * delta)
 	else:
+		if animation.current_animation != "Breathing Idle_1":
+			animation.play("Breathing Idle_1", 0.4)
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 

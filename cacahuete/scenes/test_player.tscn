@@ -9,6 +9,9 @@ radius = 0.25390625
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_22uif"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_22uif"]
+size = Vector3(0.7, 1.09, 0.8)
+
 [node name="testPlayer" type="CharacterBody3D" unique_id=2139135099]
 collision_mask = 24
 script = ExtResource("1_22uif")
@@ -31,3 +34,14 @@ transform = Transform3D(1, 0, 0, 0, 0.984402, 0.17593372, 0, -0.17593372, 0.9844
 
 [node name="model" parent="character_pivot" unique_id=1782194656 instance=ExtResource("1_e7mys")]
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0.054456234, 0, -0.05124736)
+
+[node name="Area3D" type="Area3D" parent="character_pivot" unique_id=1080320996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0548185, -1.0751343)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="character_pivot/Area3D" unique_id=291307542]
+shape = SubResource("BoxShape3D_22uif")
+
+[connection signal="body_entered" from="character_pivot/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="character_pivot/Area3D" to="." method="_on_area_3d_body_exited"]

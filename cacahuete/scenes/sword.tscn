@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://684rc8utgbvc"]
+
+[ext_resource type="Script" uid="uid://b14ycv6jk474b" path="res://scripts/sword.gd" id="1_ycbs3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n355p"]
+size = Vector3(3, 15, 3)
+
+[node name="sword" type="Node3D" unique_id=1806474355]
+script = ExtResource("1_ycbs3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=348939589]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
+mesh = SubResource("BoxMesh_n355p")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=2090479559]
+target_position = Vector3(0, 15, 0)
+collision_mask = 2

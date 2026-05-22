@@ -29,6 +29,6 @@ mesh = SubResource("CapsuleMesh_7p1mj")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=966794066]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1197700732]
+[node name="enemy_look_at" type="MeshInstance3D" parent="." unique_id=1197700732]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0638081, -1.5973022)
 mesh = SubResource("BoxMesh_7p1mj")

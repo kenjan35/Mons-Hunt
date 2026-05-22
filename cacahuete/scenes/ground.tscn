@@ -16,6 +16,7 @@ size = Vector3(100, 2, 100)
 [node name="end_zone" type="Area3D" parent="." unique_id=655428416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -65.60985, 0)
 collision_layer = 0
+collision_mask = 23
 script = ExtResource("1_pybca")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="end_zone" unique_id=1756916260]

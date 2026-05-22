@@ -13,6 +13,7 @@ var is_map_ready : bool = false
 var start_chase: float = 15.0
 var last_known_position : Vector3 = Vector3.ZERO
 var is_investigating : bool = false
+var life_point: int = 50
 
 func _ready() -> void:
 	player = get_tree().get_nodes_in_group("player")
@@ -131,6 +132,12 @@ func rotate_towards_movement():
 	
 	global_transform.basis = global_transform.basis.slerp(target_transform.basis, 0.1)
 
+func take_damage(damage: int):
+	life_point = life_point - damage
+	print("Enemy: I took damage, stop hitting please")
+	
+	if life_point <= 0:
+		queue_free()
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta

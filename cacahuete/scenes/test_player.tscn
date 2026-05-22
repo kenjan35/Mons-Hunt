@@ -1805,7 +1805,7 @@ metadata/extras = {
 }
 
 [node name="sword" parent="character_pivot/AuxScene/Node/Skeleton3D/mixamorigRightHandThumb3" unique_id=1806474355 instance=ExtResource("3_22uif")]
-transform = Transform3D(0.4994347, 3.8995304, 3.0893722, -2.311823, -2.5673976, 3.6144075, 4.4052277, -1.7894498, 1.546554, -1.422329, -0.34632874, -1.6348648)
+transform = Transform3D(0.699208, 5.4593425, 4.325122, -3.2365527, -3.5943575, 5.06017, 6.1673193, -2.5052285, 2.165178, -5.434206, 3.9972687, 9.688042)
 
 [node name="mixamorigRightHandIndex3" type="BoneAttachment3D" parent="character_pivot/AuxScene/Node/Skeleton3D" unique_id=523685228]
 transform = Transform3D(0.40583026, 0.5842561, 0.7028133, -0.004263173, -0.7677673, 0.6407147, 0.9139383, -0.26301762, -0.30909246, -68.16317, 156.16574, 28.846369)
@@ -1941,3 +1941,5 @@ libraries/ = SubResource("AnimationLibrary_qbogc")
 
 [connection signal="body_entered" from="character_pivot/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="character_pivot/Area3D" to="." method="_on_area_3d_body_exited"]
+
+[editable path="character_pivot/AuxScene/Node/Skeleton3D/mixamorigRightHandThumb3/sword"]

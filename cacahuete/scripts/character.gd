@@ -21,6 +21,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var current_speed = 7.0
 var is_game_paused: bool = false
 var current_obj = null
+@onready var weapon_ray_cast = $character_pivot/AuxScene/Node/Skeleton3D/mixamorigRightHandThumb3/sword/RayCast3D
 
 func _physics_process(delta):
 	manage_pause()
@@ -100,6 +101,16 @@ func handle_movement(direction: Vector3, delta: float):
 func handle_interactive():
 	if current_obj != null and Input.is_action_just_pressed("interact"):
 		current_obj.execute()
+
+func use_weapon():
+	if weapon_ray_cast.is_colliding():
+		var target = weapon_ray_cast.get_collider()
+		if target.has_method("take_damage"):
+			target.take_damage(10)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("attack"):
+		use_weapon()
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

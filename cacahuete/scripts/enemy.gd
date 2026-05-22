@@ -3,7 +3,6 @@ extends CharacterBody3D
 const CHASE = 10.0
 const WALK = 3.0
 
-@export var player_path: NodePath
 @onready var agent = $NavigationAgent3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -16,8 +15,9 @@ var last_known_position : Vector3 = Vector3.ZERO
 var is_investigating : bool = false
 
 func _ready() -> void:
-	player = get_node(player_path)
-	
+	player = get_tree().get_nodes_in_group("player")
+	if player.size() > 0:
+		player = player.pick_random()
 	await get_tree().create_timer(0.1).timeout
 	
 	is_map_ready = true

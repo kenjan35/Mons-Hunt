@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 		
 	else:
 		run_patrol_logic()
-	
+	rotate_towards_movement()
 	move_and_slide()
 
 
@@ -122,6 +122,14 @@ func handle_waypoint_arrival():
 		choose_random_patrol_position()
 	is_waiting = false
 
+func rotate_towards_movement():
+	var horizontal_velocity = Vector2(velocity.x, velocity.z)
+	if horizontal_velocity.length() < 0.2:
+		return
+	var look_target = global_position + Vector3(velocity.x, 0, velocity.z)
+	var target_transform = global_transform.looking_at(look_target, Vector3.UP)
+	
+	global_transform.basis = global_transform.basis.slerp(target_transform.basis, 0.1)
 
 func apply_gravity(delta):
 	if not is_on_floor():

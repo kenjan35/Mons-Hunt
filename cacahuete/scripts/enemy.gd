@@ -1,9 +1,19 @@
 extends CharacterBody3D
 
+enum  state {
+	IDLE,
+	PATROL,
+	CHASE,
+	INVESTIGATE,
+	ATTACK,
+	DEATH,
+	TAKE_DAMAGE
+}
 const CHASE = 10.0
 const WALK = 3.0
 
 @onready var agent = $NavigationAgent3D
+@onready var animation = $character_model/AnimationPlayer
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var player = null
@@ -14,6 +24,9 @@ var start_chase: float = 15.0
 var last_known_position : Vector3 = Vector3.ZERO
 var is_investigating : bool = false
 var life_point: int = 50
+var current_state = state.IDLE
+var player_in_attack_range = 2.0
+var is_attacking: bool = false
 
 func _ready() -> void:
 	player = get_tree().get_nodes_in_group("player")
@@ -28,15 +41,23 @@ func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	
 	if not is_map_ready:
+		current_state = state.IDLE
 		velocity.x = 0
 		velocity.z = 0
 		move_and_slide()
 		return
-		
+
 	agent.set_target_position(player.global_position)
 	var distance_to_player = global_position.distance_to(player.global_position)
 	
-	if distance_to_player < start_chase and agent.is_target_reachable():
+	if distance_to_player <= player_in_attack_range:
+		current_state = state.ATTACK
+		is_attacking = true
+		velocity.x = 0
+		velocity.z = 0
+		trigger_attack()
+	elif distance_to_player < start_chase and agent.is_target_reachable():
+		current_state = state.CHASE
 		is_investigating = false 
 		
 		last_known_position = player.global_position 
@@ -52,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		run_patrol_logic()
 	rotate_towards_movement()
+	update_animations()
 	move_and_slide()
 
 
@@ -59,6 +81,7 @@ func run_investigation_logic():
 	agent.set_target_position(last_known_position)
 	
 	if is_waiting:
+		current_state = state.IDLE
 		velocity.x = 0
 		velocity.z = 0
 		return
@@ -66,7 +89,7 @@ func run_investigation_logic():
 	if agent.is_navigation_finished():
 		handle_investigation_arrival()
 		return
-
+	current_state = state.INVESTIGATE
 	var next_path = agent.get_next_path_position()
 	var move_dir = (next_path - global_position).normalized() * CHASE
 	velocity.x = move_dir.x
@@ -89,13 +112,14 @@ func run_patrol_logic():
 	agent.set_target_position(patrol_target_position)
 	
 	if is_waiting:
+		current_state = state.IDLE
 		velocity.x = 0
 		velocity.z = 0
 		return
 	if agent.is_navigation_finished():
 		handle_waypoint_arrival()
 		return
-
+	current_state = state.PATROL
 	var next_path = agent.get_next_path_position()
 	var move_dir = (next_path - global_position).normalized() * WALK
 	velocity.x = move_dir.x
@@ -131,6 +155,29 @@ func rotate_towards_movement():
 	var target_transform = global_transform.looking_at(look_target, Vector3.UP)
 	
 	global_transform.basis = global_transform.basis.slerp(target_transform.basis, 0.1)
+
+func update_animations():
+	match current_state:
+		state.IDLE:
+			animation.play("idle/idle", 0.2)
+		state.PATROL:
+			animation.play("walk/walk", 0.2)
+		state.CHASE:
+			animation.play("run/run", 0.2)
+		#state.ATTACK:
+			#animation.play("right_attack/right_hand_attack", 0.1)
+		state.TAKE_DAMAGE:
+			# animation.play("hit_flinch", 0.05)
+			pass
+		state.DEATH:
+			# animation.play("die", 0.1)
+			pass
+
+func trigger_attack():
+	animation.play("right_attack/right_hand_attack", 0.1)
+	await animation.animation_finished
+
+	is_attacking = false
 
 func take_damage(damage: int):
 	life_point = life_point - damage

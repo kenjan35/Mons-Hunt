@@ -1,34 +1,87 @@
 [gd_scene format=3 uid="uid://bi47luam7fx4t"]
 
 [ext_resource type="Script" uid="uid://brqofdf85ye54" path="res://scripts/enemy.gd" id="1_7p1mj"]
+[ext_resource type="PackedScene" uid="uid://dc6ankl07hpr" path="res://assets/enemy/character_beta.fbx" id="2_md0e3"]
+[ext_resource type="Animation" uid="uid://bir18eeg1n7jd" path="res://assets/enemy/idle.res" id="3_c4w8v"]
+[ext_resource type="Animation" uid="uid://ujme17m65heb" path="res://assets/enemy/run.res" id="4_5uy6h"]
+[ext_resource type="Animation" uid="uid://dsp3ptdfaglfw" path="res://assets/enemy/walk.res" id="4_c4w8v"]
+[ext_resource type="Animation" uid="uid://5tndsj00p4ld" path="res://assets/enemy/right_hand_attack.res" id="4_xwavj"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8tegq"]
-height = 1.9990234
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nenq2"]
+_data = {
+&"idle": ExtResource("3_c4w8v")
+}
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tegq"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_md484"]
+_data = {
+&"right_hand_attack": ExtResource("4_xwavj")
+}
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_7p1mj"]
-material = SubResource("StandardMaterial3D_8tegq")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c4w8v"]
+_data = {
+&"run": ExtResource("4_5uy6h")
+}
 
-[sub_resource type="BoxMesh" id="BoxMesh_7p1mj"]
-size = Vector3(0.5, 0.5, 0.5)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xwavj"]
+_data = {
+&"walk": ExtResource("4_c4w8v")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c4w8v"]
+height = 3.1
 
 [node name="Enemy" type="CharacterBody3D" unique_id=1661372925 groups=["enemy"]]
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_7p1mj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1279094504]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9995117, 0)
-shape = SubResource("CapsuleShape3D_8tegq")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=340616389]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_7p1mj")
-
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=966794066]
 
-[node name="enemy_look_at" type="MeshInstance3D" parent="." unique_id=1197700732]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0638081, -1.5973022)
-mesh = SubResource("BoxMesh_7p1mj")
+[node name="character_model" parent="." unique_id=194430033 instance=ExtResource("2_md0e3")]
+transform = Transform3D(-1.75, 0, -1.5298986e-07, 0, 1.75, 0, 1.5298986e-07, 0, -1.75, 0, 0, 0)
+
+[node name="Skeleton3D" parent="character_model" index="0" unique_id=1026873060]
+bones/0/position = Vector3(-0.1426829, 0.849696, 0.3807271)
+bones/0/rotation = Quaternion(0.055246916, -0.34747255, 0.08967101, 0.9317563)
+bones/1/rotation = Quaternion(0.030467652, 0.102354065, 0.10203621, 0.98903185)
+bones/2/rotation = Quaternion(0.015420809, 0.09785908, 0.023338387, 0.9948071)
+bones/3/rotation = Quaternion(0.17394425, 0.0331512, 0.047096014, 0.9830699)
+bones/4/rotation = Quaternion(-0.08219141, -0.071381316, -0.039921746, 0.993255)
+bones/5/rotation = Quaternion(-0.29025114, -0.07739112, -0.1617639, 0.93999857)
+bones/7/rotation = Quaternion(0.5159003, 0.48690316, -0.5488479, 0.4421971)
+bones/8/rotation = Quaternion(-0.16422972, -0.15458469, -0.4427231, 0.8678297)
+bones/9/rotation = Quaternion(0.084300384, -0.27648106, 0.114547126, 0.95043707)
+bones/11/rotation = Quaternion(0.5305702, -0.3706678, 0.27325186, 0.71164185)
+bones/12/rotation = Quaternion(-0.1501709, 0.13699159, 0.29721007, 0.93292457)
+bones/13/rotation = Quaternion(0.1443033, 0.108351916, -0.3317381, 0.9259516)
+bones/14/rotation = Quaternion(-0.19615233, -0.09623393, -0.50080764, 0.8375292)
+bones/15/rotation = Quaternion(-0.031969573, 0.0057362444, -0.119267955, 0.9923308)
+bones/16/rotation = Quaternion(0.019250445, -0.0075154766, 0.024437523, 0.99948776)
+bones/17/rotation = Quaternion(0.019755678, -0.010614584, 0.009062332, 0.9997075)
+bones/19/rotation = Quaternion(0.0453105, 0.6934756, -0.1256081, 0.70799804)
+bones/20/rotation = Quaternion(-0.03730848, -0.0053563756, 0.01916465, 0.9991057)
+bones/21/rotation = Quaternion(-0.0385198, 0.0018468552, 0.011507485, 0.99918985)
+bones/23/rotation = Quaternion(0.29448384, -0.0089970725, -0.50210756, 0.81307226)
+bones/24/rotation = Quaternion(-0.068804726, 0.08076118, 0.23504418, 0.9661769)
+bones/25/rotation = Quaternion(-0.05177668, 0.042159792, 0.12387865, 0.99004847)
+bones/27/rotation = Quaternion(0.03596444, 0.21014932, 0.96564245, -0.14858863)
+bones/28/rotation = Quaternion(-0.4952726, 0.11302271, -0.18561825, 0.8411164)
+bones/29/rotation = Quaternion(0.5688062, -0.02008769, 0.022902686, 0.8219073)
+bones/30/rotation = Quaternion(0.50981975, -0.04733397, -0.18245499, 0.8393768)
+bones/32/rotation = Quaternion(-0.114850335, 0.21640025, 0.94126797, 0.23236834)
+bones/33/rotation = Quaternion(-0.35415134, -0.14214502, 0.029917734, 0.923838)
+bones/34/rotation = Quaternion(0.60587764, -0.17715593, 0.14763565, 0.7614012)
+bones/35/rotation = Quaternion(0.41473705, 0.058572035, 0.12020747, 0.9000626)
+
+[node name="AnimationPlayer" parent="character_model" index="1" unique_id=1396709976]
+libraries/idle = SubResource("AnimationLibrary_nenq2")
+libraries/right_attack = SubResource("AnimationLibrary_md484")
+libraries/run = SubResource("AnimationLibrary_c4w8v")
+libraries/walk = SubResource("AnimationLibrary_xwavj")
+autoplay = &"right_attack/right_hand_attack"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1774965046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.563, 0)
+shape = SubResource("CapsuleShape3D_c4w8v")
+
+[editable path="character_model"]

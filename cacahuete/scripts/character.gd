@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@export var walk_speed = 7.0
-@export var run_speed = 14.0
+@export var walk_speed = 5.0
+@export var run_speed = 11.0
 @export var jump_velocity = 7.0
 @export var rotation_speed = 10.0
 
